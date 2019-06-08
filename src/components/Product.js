@@ -1,4 +1,6 @@
 import React from 'react';
+import {observer} from 'mobx-react'
+
 class Product extends React.Component{
 
     handleClick = () => {
@@ -30,4 +32,4 @@ class Product extends React.Component{
         )
     }
 }
-export default Product;
+export default observer(Product);

@@ -1,6 +1,10 @@
 import React from 'react';
 import Product from './Product.js';
 import ProductFunktyjny from './ProductFunktyjny.js';
+import productStore from '../stores/ProductStore';
+import { observer } from 'mobx-react';
+
+@observer
 class ProductList extends React.Component{
 
     state={
@@ -13,24 +17,27 @@ class ProductList extends React.Component{
     ]}
 
     handleBuyClick = id => {
-        this.setState( prevStat => {
-            const products = prevStat.products.map(p => p.id===id
-            ?
-            {
-               ...p, isSold:true
-            }
-            : p
-            )
-            console.log(products);
-            return {products}
-        });
+        // this.setState( prevStat => {
+        //     const products = prevStat.products.map(p => p.id===id
+        //     ?
+        //     {
+        //        ...p, isSold:true
+        //     }
+        //     : p
+        //     )
+        //     console.log(products);
+        //     return {products}
+        // });
+        const productToSold = productStore.products.find(p => p.id === id);
+        productToSold.isSold = true;
+        console.log(productStore);
     }
 
     render(){
         return(
             <ul>
                 {
-                    this.state.products.map(p =>(
+                    productStore.products.map(p =>(
                        <li key={p.id}>
                            
                                
