@@ -1,9 +1,10 @@
 import React from 'react';
 import Product from './Product.js';
 import ProductFunktyjny from './ProductFunktyjny.js';
-import productStore from '../stores/ProductStore';
-import { observer } from 'mobx-react';
+// import productStore from '../stores/ProductStore';
+import { observer, inject } from 'mobx-react';
 
+@inject('productStore')
 @observer
 class ProductList extends React.Component{
 
@@ -28,16 +29,16 @@ class ProductList extends React.Component{
         //     console.log(products);
         //     return {products}
         // });
-        const productToSold = productStore.products.find(p => p.id === id);
+        const productToSold = this.props.productStore.products.find(p => p.id === id);
         productToSold.isSold = true;
-        console.log(productStore);
+        console.log(this.props.productStore);
     }
 
     render(){
         return(
             <ul>
                 {
-                    productStore.products.map(p =>(
+                    this.props.productStore.products.map(p =>(
                        <li key={p.id}>
                            
                                
